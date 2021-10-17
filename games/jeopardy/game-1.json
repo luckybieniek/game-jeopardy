@@ -1,0 +1,283 @@
+{
+  "questions": {
+    "first-round": {
+      "Bart-ender, pass me a drink": {
+        "100": {
+          "question": "The phrase that Bart's mum is best known for",
+          "answer": "Bartuś, Kanapeczki"
+        },
+        "200": {
+          "question": "This is the number of siblings that Bart has",
+          "answer": "2"
+        },
+        "300": {
+          "question": "A large variety of this object can be found in Bart's room",
+          "answer": "Rubik's cubes"
+        },
+        "400": {
+          "question": "A salt tree sculpture that can be found in Bart's room which originates from this place",
+          "answer": "Wieliczka"
+        },
+        "500": {
+          "question": "A Polish city that's also the birthplace of Bart",
+          "answer": "Malbork"
+        }
+      },
+      "Ahoy, me mateys": {
+        "100": {
+          "question": "A pirate's life uses characters from this popular disney franchise",
+          "answer": "Pirates of the Caribbean"
+        },
+        "200": {
+          "question": "The following three types of ships can be chosen to play with",
+          "answer": "Sloop, Brigantine, Galleon"
+        },
+        "300": {
+          "question": "Players can play music on this mechanical string based instrument operated with a handcrank",
+          "answer": "Hurdy Gurdy"
+        },
+        "400": {
+          "question": "The name for an alcohol made out of rum diluted with water",
+          "answer": "Grog"
+        },
+        "500": {
+          "question": "A curse that gives entities a fiery/glowing aesthetic",
+          "answer": "Ashen curse"
+        }
+      },
+      "MEOW":  {
+        "100": {
+          "question": "Cow",
+          "answer": ""
+        },
+        "200": {
+          "question": "Donkey",
+          "answer": ""
+        },
+        "300": {
+          "question": "Duck",
+          "answer": ""
+        },
+        "400": {
+          "question": "Elephant",
+          "answer": ""
+        },
+        "500": {
+          "question": "Fox",
+          "answer": ""
+        }
+      },
+      "I can't bear this":  {
+        "100": {
+          "question": "This type of bear is most commonly found in the arctic",
+          "answer": "Polar bear"
+        },
+        "200": {
+          "question": "There are this many spieces of bears in the world",
+          "answer": "8"
+        },
+        "300": {
+          "question": "The top speed at which bears can run",
+          "answer": "40mph"
+        },
+        "400": {
+          "question": "The name of the Syrian brown bear that was officially recruited by the Polish army",
+          "answer": "Wojtek"
+        },
+        "500": {
+          "question": "Koalas, while they look like they belong to the bear family are actually a member of this family",
+          "answer": "Marsupials"
+        }
+      },
+      "Mid lane rocks":  {
+        "100": {
+          "question": "DOTA 2 was originally a mod for this game",
+          "answer": "Warcraft 3"
+        },
+        "200": {
+          "question": "A way to modify the look of a character, usually paid for",
+          "answer": "Skin"
+        },
+        "300": {
+          "question": "A 3rd person MOBA game where you control gods",
+          "answer": "Smite"
+        },
+        "400": {
+          "question": "This is the most popular champion is League of Legends",
+          "answer": "Ezreal"
+        },
+        "500": {
+          "question": "This is the year in which League of Legends launched",
+          "answer": "2009"
+        }
+      }
+    },
+    "second-round": {
+      "That's kinda sus bro": {
+        "200": {
+          "question": "The colour of the among us character often called sus",
+          "answer": "Red"
+        },
+        "400": {
+          "question": "While not being popular on launch in 2018, Among us gained popularity thanks to these two platforms",
+          "answer": "Twitch and youtube"
+        },
+        "600": {
+          "question": "The name of a letter believed to be written by Jack the Ripper containing half a human kidney",
+          "answer": "From Hell"
+        },
+        "800": {
+          "question": "A nickname for an unidentified serial killer best known for using cryptograms",
+          "answer": "Zodiac Killer"
+        },
+        "1000": {
+          "question": "This serial killer, best known for using bombs had an IQ of just under 170",
+          "answer": "Unabomber/Ted Kaczynski"
+        }
+      },
+      "Who's that prophet-mon": {
+        "200": {
+          "question": "The son of Hannah",
+          "answer": "Samuel"
+        },
+        "400": {
+          "question": "Lead Israel out of Egypt",
+          "answer": "Moses"
+        },
+        "600": {
+          "question": "Saw a mighty chariot",
+          "answer": "Ezekiel"
+        },
+        "800": {
+          "question": "Was a simple herdsman",
+          "answer": "Amos"
+        },
+        "1000": {
+          "question": "The first person described as a prophet",
+          "answer": "Abraham"
+        }
+      },
+      "You shall not pass!":  {
+        "200": {
+          "question": "Viggo Mortensen, who played Aragorn, broke his toe while performing this action",
+          "answer": "Kicking a helmet"
+        },
+        "400": {
+          "question": "Gandalf is a member of this race",
+          "answer": "Maiar"
+        },
+        "600": {
+          "question": "The name of the book containing mythopoetic stories of the LOTR universe",
+          "answer": "Silmarillion"
+        },
+        "800": {
+          "question": "The Gift of Men given by Iluvatar",
+          "answer": "Mortality"
+        },
+        "1000": {
+          "question": "This is the full name of the author of the LOTR books",
+          "answer": "John Ronald Reuel Tolkien"
+        }
+      },
+      "What da dog doin":  {
+        "200": {
+          "question": "https://upload.wikimedia.org/wikipedia/commons/d/d0/German_Shepherd_-_DSC_0346_%2810096362833%29.jpg",
+          "answer": "German shepard"
+        },
+        "400": {
+          "question": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Taka_Shiba.jpg/1200px-Taka_Shiba.jpg",
+          "answer": "Shiba Inu"
+        },
+        "600": {
+          "question": "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/27122952/Bull-Terrier-head-portrait-in-profile-outdoors.jpg",
+          "answer": "Bull Terrier"
+        },
+        "800": {
+          "question": "https://vetstreet.brightspotcdn.com/dims4/default/e5afc76/2147483647/crop/0x0%2B0%2B0/resize/645x380/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2F34%2F233340a10711e087a80050568d634f%2Ffile%2FMastiff-4-645mk062111.jpg",
+          "answer": "Mastiff"
+        },
+        "1000": {
+          "question": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Hondenras_Mudi.jpg",
+          "answer": "Mudi"
+        }
+      },
+      "Roll a perception check":  {
+        "200": {
+          "question": "D&D is best known for this dice",
+          "answer": "D20"
+        },
+        "400": {
+          "question": "This class is widely considered to be the most flirtatious",
+          "answer": "Bard"
+        },
+        "600": {
+          "question": "The most powerful create in D&D",
+          "answer": "Tarrasque"
+        },
+        "800": {
+          "question": "The grease spell is best known for this controversy",
+          "answer": "Grease not being flammable"
+        },
+        "1000": {
+          "question": "This is the decade in which D&D was first published",
+          "answer": "1970"
+        }
+      }
+    }
+  },
+  "final-question": {
+    "question": "Where in the world can the deepest lake be found?",
+    "answer": "Russia, Lake Baikal"
+  },
+  "quick-money": {
+    "Name a Pokemon": {
+      "Pikachu": 38,
+      "Charizard": 10,
+      "Squirtle": 4,
+      "Raichu": 4,
+      "Charmander": 4,
+      "Blastoise": 3,
+      "Vulpix": 3,
+      "Eevee": 3
+    },
+    "Name something people are often afraid of": {
+      "Spiders": 24,
+      "Dark": 12,
+      "Heights": 12,
+      "Death": 7,
+      "Loneliness": 5,
+      "Ghosts": 3,
+      "Snakes": 3,
+      "Capitalism": 3,
+      "Nothing": 3,
+      "Failure": 3
+    },
+    "Name a slow moving creature": {
+      "Sloth": 31,
+      "Snail": 30,
+      "Slug": 12,
+      "Turtle": 12,
+      "Tortoise": 3
+    },
+    "Name a colour": {
+      "Blue": 33,
+      "Red": 16,
+      "Green": 12,
+      "Purple": 9,
+      "Yellow": 8,
+      "Black": 5,
+      "Orange": 3,
+      "Pink": 3
+    },
+    "Name an alcohol": {
+      "Vodka": 31,
+      "Whiskey": 16,
+      "Beer": 12,
+      "Rum": 7,
+      "Gin": 5,
+      "Isopropyl": 4,
+      "Cider": 3,
+      "Tequila": 3
+    }
+  }
+}

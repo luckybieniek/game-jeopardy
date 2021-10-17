@@ -1,0 +1,283 @@
+{
+  "questions": {
+    "first-round": {
+      "Bart-ender, pass me a drink": {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "Ahoy, me mateys": {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "MEOW":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "I can't bear this":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "Mid lane rocks":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      }
+    },
+    "second-round": {
+      "That's kinda sus bro": {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "Who's that prophet-mon": {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "You shall not pass!":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "What da dog doin":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      },
+      "Nat 20":  {
+        "100": {
+          "question": "",
+          "answer": ""
+        },
+        "200": {
+          "question": "",
+          "answer": ""
+        },
+        "300": {
+          "question": "",
+          "answer": ""
+        },
+        "400": {
+          "question": "",
+          "answer": ""
+        },
+        "500": {
+          "question": "",
+          "answer": ""
+        }
+      }
+    }
+  },
+  "final-question": {
+    "question": "Where in the world can the deepest lake be found?",
+    "answer": "Russia, Lake Baikal"
+  },
+  "quick-money": {
+    "Name a Pokemon": {
+      "Pikachu": 38,
+      "Charizard": 10,
+      "Squirtle": 4,
+      "Raichu": 4,
+      "Charmander": 4,
+      "Blastoise": 3,
+      "Vulpix": 3,
+      "Eevee": 3
+    },
+    "Name something people are often afraid of": {
+      "Spiders": 24,
+      "Dark": 12,
+      "Heights": 12,
+      "Death": 7,
+      "Loneliness": 5,
+      "Ghosts": 3,
+      "Snakes": 3,
+      "Capitalism": 3,
+      "Nothing": 3,
+      "Failure": 3
+    },
+    "Name a slow moving creature": {
+      "Sloth": 31,
+      "Snail": 30,
+      "Slug": 12,
+      "Turtle": 12,
+      "Tortoise": 3
+    },
+    "Name a colour": {
+      "Blue": 33,
+      "Red": 16,
+      "Green": 12,
+      "Purple": 9,
+      "Yellow": 8,
+      "Black": 5,
+      "Orange": 3,
+      "Pink": 3
+    },
+    "Name an alcohol": {
+      "Vodka": 31,
+      "Whiskey": 16,
+      "Beer": 12,
+      "Rum": 7,
+      "Gin": 5,
+      "Isopropyl": 4,
+      "Cider": 3,
+      "Tequila": 3
+    }
+  }
+}

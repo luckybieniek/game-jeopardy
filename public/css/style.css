@@ -1,0 +1,15 @@
+.text-xs {
+    font-size: 25%;
+}
+.text-s {
+    font-size: 50%;
+}
+.text-l {
+    font-size: 200%;
+}
+.text-xl {
+    font-size: 400%;
+}
+.text-xxl {
+    font-size: 800%;
+}
