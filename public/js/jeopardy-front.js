@@ -98,7 +98,34 @@ class JeopardyPlayer extends BaseJeopardy
     constructor()
     {
         super();
-        this.showJoinScreen();
+        this.init();
+    }
+
+    init()
+    {
+        this.addListeners();
+        this.getCodeCookie();
+        this.attemptConnect();
+    }
+
+    attemptConnect()
+    {
+        this.joinRoom('player-attempt', {
+            session: this.sessionCode
+        });
+    }
+
+    addListeners()
+    {
+        this.on('join-attempt-failed', this.showJoinScreen.bind(this));
+
+        this.on('join-attempt-successful', this.joinAttemptSuccessful.bind(this))
+    }
+
+    joinAttemptSuccessful(data)
+    {
+        this.nickname = data.nickname;
+        this.showWaitingScreen();
     }
 
     showJoinScreen()
@@ -120,16 +147,17 @@ class JeopardyPlayer extends BaseJeopardy
         const form = new Element('form')
             .addChild(nickname)
             .addChild(submit)
-            .on('submit', (e) => {
-                e.preventDefault();
-                this.nickname = document.getElementById('nickname').value;
-                this.createCodeCookie();
-                this.announceJoinRoom();
-                this.after(() => this.showWaitingScreen());
-            });
+            .on('submit', this.submitJoinGameForm.bind(this));
 
         this.app.addChild(text)
             .addChild(form);
+    }
+
+    submitJoinGameForm(e)
+    {
+        e.preventDefault();
+        this.nickname = document.getElementById('nickname').value;
+        this.announceJoinRoom();
     }
 
     showWaitingScreen()
@@ -148,18 +176,6 @@ class JeopardyPlayer extends BaseJeopardy
             nickname: this.nickname,
             session: this.sessionCode
         });
-        // TODO: Add logic that if a player refreshes, they're automatically reconnected
-    }
-
-    after(callback)
-    {
-        setTimeout(() => {
-            if (this.errors.length > 0) {
-                this.errors = [];
-                return;
-            }
-            callback();
-        }, 250);
     }
 }
 

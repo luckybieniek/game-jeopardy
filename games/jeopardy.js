@@ -24,6 +24,8 @@ class Jeopardy extends BaseGame
     {
         socket.on('player-joined', (data) => this.playerJoined(socket, data));
 
+        socket.on('player-attempt-joined', (data) => this.playerAttemptingJoin(socket, data));
+
         socket.on('controller-joined', (data) => this.controllerJoined(socket, data));
 
         socket.on('presenter-joined', (data) => this.presenterJoined(socket, data));
@@ -48,8 +50,32 @@ class Jeopardy extends BaseGame
 
         console.log(`${player.nickname} has connected!`);
 
+        socket.emit('join-attempt-successful', {
+            nickname: data.nickname
+        });
+
         this.emitControllerData(this.socket);
         this.emitPresenterData(this.socket);
+    }
+
+    playerAttemptingJoin(socket, data)
+    {
+        for (let i = 0; i < this.connections.players.length; i++) {
+            let player = this.connections.players[i];
+
+            if (player.session !== data.session) {
+                continue;
+            }
+
+            socket.emit('join-attempt-successful', {
+                nickname: player.nickname
+            });
+
+            this.connections.players[i].id = socket.id;
+            return;
+        }
+
+        socket.emit('join-attempt-failed')
     }
 
     controllerJoined(socket, data)
