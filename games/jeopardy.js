@@ -129,8 +129,6 @@ class Jeopardy extends BaseGame
     presenterJoined(socket, data)
     {
         this.emitPresenterData(socket);
-
-        console.log('A presenter has connected');
     }
 
     emitPresenterData(socket)
@@ -142,7 +140,9 @@ class Jeopardy extends BaseGame
     {
         return {
             players: this.connections.players,
-            status: this.game.state
+            status: this.game.state,
+            gameData: this.game.data,
+            gameProgress: this.game.progress
         }
     }
 
@@ -154,6 +154,7 @@ class Jeopardy extends BaseGame
 
         this.socket.emit('game-starting');
         this.emitControllerData(this.socket);
+        this.emitPresenterData(this.socket)
     }
 }
 

@@ -384,7 +384,9 @@ class JeopardyPresenter extends BaseJeopardy
     data = null;
 
     viewMap = {
-        'waiting-room': this.renderWaitingRoom
+        'waiting-room': this.renderWaitingRoom,
+        'first-round': this.renderQuestionGrid,
+        'second-round': this.renderQuestionGrid,
     };
 
     constructor()
@@ -423,6 +425,62 @@ class JeopardyPresenter extends BaseJeopardy
             .wipe()
             .addChild(new Element('div').text('Waiting Room'))
             .addChild(players)
+    }
+
+    renderQuestionGrid()
+    {
+        const questionGrid = this.getQuestionGrid();
+        const players = this.getPlayersList();
+
+        this.app
+            .wipe()
+            .addChild(questionGrid)
+            .addChild(players)
+    }
+
+    getQuestionGrid()
+    {
+        const grid = new Element('div');
+
+        const gridData = this.data.gameData.questions[this.data.status];
+
+        const categories = Object.keys(gridData);
+
+        const gridWrapper = new Element('div');
+
+        for (let i = 0; i < categories.length; i++) {
+            let category = categories[i];
+            let categoryQuestions = gridData[category];
+
+            let categoryWrapper = new Element('div')
+                .addChild(new Element('strong').text(category));
+
+            let questionPoints = Object.keys(categoryQuestions);
+
+            for (let x = 0; x < questionPoints.length; x++) {
+                let questionPoint = questionPoints[x];
+                let uniqueName = `${category}-${questionPoint}`;
+
+                if (this.data.gameProgress.hasOwnProperty(uniqueName)) {
+                    categoryWrapper.addChild(
+                        new Element('div')
+                            .text('')
+                    );
+                    continue;
+                }
+
+                categoryWrapper.addChild(
+                    new Element('div')
+                        .text(questionPoint)
+                )
+            }
+
+            gridWrapper.addChild(categoryWrapper);
+        }
+
+        grid.addChild(gridWrapper);
+
+        return grid;
     }
 
     getPlayersList()
