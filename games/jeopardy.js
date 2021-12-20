@@ -63,7 +63,6 @@ class Jeopardy extends BaseGame
 
         socket.emit('controller-data', this.getControllerData());
 
-
         this.connections.controller = {
             id: socket.id,
             session: data.session
@@ -75,7 +74,8 @@ class Jeopardy extends BaseGame
     getControllerData()
     {
         return {
-            players: this.connections.players
+            players: this.connections.players,
+            status: this.gameState
         }
     }
 

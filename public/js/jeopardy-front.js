@@ -204,6 +204,8 @@ class JeopardyController extends BaseJeopardy
 
     refreshControlScreen(data)
     {
+        const status = new Element('div').html(`<strong>Game status:</strong> ${data.status}`)
+
         const players = new Element('div');
 
         players.addChild(new Element('strong').text('Players'));
@@ -216,8 +218,11 @@ class JeopardyController extends BaseJeopardy
             );
         }
 
+
+
         JeopardyController.staticApp()
             .wipe()
+            .addChild(status)
             .addChild(players);
     }
 
