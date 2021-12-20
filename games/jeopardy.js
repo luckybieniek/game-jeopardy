@@ -49,6 +49,7 @@ class Jeopardy extends BaseGame
         console.log(`${player.nickname} has connected!`);
 
         this.emitControllerData(this.socket);
+        this.emitPresenterData(this.socket);
     }
 
     controllerJoined(socket, data)

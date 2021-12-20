@@ -58,13 +58,6 @@ class BaseJeopardy extends BaseGameFront
         this.app.loadFromId('app')
     }
 
-    static staticApp()
-    {
-        const app = new Element();
-        app.loadFromId('app');
-        return app;
-    }
-
     joinRoom(mode, data)
     {
         this.emit(`${mode}-joined`, data);
@@ -155,6 +148,7 @@ class JeopardyPlayer extends BaseJeopardy
             nickname: this.nickname,
             session: this.sessionCode
         });
+        // TODO: Add logic that if a player refreshes, they're automatically reconnected
     }
 
     after(callback)
@@ -171,6 +165,8 @@ class JeopardyPlayer extends BaseJeopardy
 
 class JeopardyController extends BaseJeopardy
 {
+    data = null;
+
     constructor()
     {
         super();
@@ -204,39 +200,59 @@ class JeopardyController extends BaseJeopardy
 
     refreshControlScreen(data)
     {
+        this.data = data;
+
         const wrapper = new Element('div')
             .prop('id', 'wrapper');
 
-        const status = new Element('div').html(`<strong>Game status:</strong> ${data.status}`)
+        this.addGameStatus(wrapper);
+        this.addPlayerList(wrapper);
+        this.addStartGameButton(wrapper);
+        // TODO: add a "reset all" button that wipes everything
 
+        this.app
+            .wipe()
+            .addChild(wrapper);
+    }
+
+    addGameStatus(wrapper)
+    {
+        wrapper.addChild(
+            new Element('div').html(`<strong>Game status:</strong> ${this.data.status}`)
+        );
+    }
+
+    addPlayerList(wrapper)
+    {
         const players = new Element('div');
 
         players.addChild(new Element('strong').text('Players'));
 
-        for (let i = 0; i < data.players.length; i++) {
-            let player = data.players[i];
+        for (let i = 0; i < this.data.players.length; i++) {
+            let player = this.data.players[i];
 
             players.addChild(
                 new Element('div').text(player.nickname)
             );
         }
 
-        wrapper.addChild(status)
-            .addChild(players);
+        wrapper.addChild(players);
+    }
 
-        if (data.status === 'waiting-room') {
-            const startButton = new Element('button').text('Start game!');
-            wrapper.addChild(startButton);
+    addStartGameButton(wrapper)
+    {
+        if (this.data.status !== 'waiting-room') {
+            return;
         }
-
-        JeopardyController.staticApp()
-            .wipe()
-            .addChild(wrapper);
+        wrapper.addChild(
+            new Element('button')
+                .text('Start game!')
+        );
     }
 
     addListeners()
     {
-        this.on('controller-data', this.refreshControlScreen);
+        this.on('controller-data', this.refreshControlScreen.bind(this));
     }
 }
 
