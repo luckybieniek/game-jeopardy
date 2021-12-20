@@ -223,6 +223,7 @@ class JeopardyController extends BaseJeopardy
 
         this.addGameStatus(wrapper);
         this.addPlayerList(wrapper);
+        this.addGameModeOptions(wrapper);
         this.addStartGameButton(wrapper);
         // TODO: add a "reset all" button that wipes everything
 
@@ -255,6 +256,28 @@ class JeopardyController extends BaseJeopardy
         wrapper.addChild(players);
     }
 
+    addGameModeOptions(wrapper)
+    {
+        if (this.data.status !== 'waiting-room') {
+            return;
+        }
+
+        const games = new Element('select');
+
+        for (let i = 0; i < this.data.availableGames.length; i++) {
+            let game = this.data.availableGames[i];
+
+            games.addChild(
+                new Element('option')
+                    .prop('value', game)
+                    .text(game)
+            );
+        }
+
+        wrapper.addChild(games);
+
+    }
+
     addStartGameButton(wrapper)
     {
         if (this.data.status !== 'waiting-room') {
@@ -263,7 +286,13 @@ class JeopardyController extends BaseJeopardy
         wrapper.addChild(
             new Element('button')
                 .text('Start game!')
+                .on('click', this.startGame)
         );
+    }
+
+    startGame()
+    {
+        console.log('Starting Game!!');
     }
 
     addListeners()

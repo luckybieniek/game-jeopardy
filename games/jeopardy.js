@@ -1,4 +1,8 @@
 const BaseGame = require('./BaseGame');
+const gameData = {
+    game1: require('./jeopardy/game-1.json'),
+    game2: require('./jeopardy/game-2.json'),
+}
 
 class Jeopardy extends BaseGame
 {
@@ -9,6 +13,8 @@ class Jeopardy extends BaseGame
     }
 
     gameState = 'waiting-room'
+
+    game = 'game1'
 
     constructor(socket) {
         super(socket);
@@ -107,7 +113,8 @@ class Jeopardy extends BaseGame
     {
         return {
             players: this.connections.players,
-            status: this.gameState
+            status: this.gameState,
+            availableGames: Object.keys(gameData)
         }
     }
 
