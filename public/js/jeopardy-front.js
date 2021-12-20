@@ -242,19 +242,31 @@ class JeopardyController extends BaseJeopardy
 
 class JeopardyPresenter extends BaseJeopardy
 {
+    data = null;
+
     viewMap = {
         'waiting-room': this.renderWaitingRoom
     };
 
-    constructor() {
+    constructor()
+    {
         super();
-        this.renderView('waiting-room');
+        this.init();
+    }
+
+    init()
+    {
+        this.addListeners();
+        this.announceJoinRoom();
     }
 
     renderView(view)
     {
         this.validateView(view);
-        this.viewMap[view]();
+
+        const renderFunc = this.viewMap[view].bind(this);
+
+        renderFunc();
     }
 
     validateView(view)
@@ -266,7 +278,42 @@ class JeopardyPresenter extends BaseJeopardy
 
     renderWaitingRoom()
     {
+        const players = this.getPlayersList();
 
+        this.app
+            .wipe()
+            .addChild(new Element('div').text('Waiting Room'))
+            .addChild(players)
+    }
+
+    getPlayersList()
+    {
+        const players = new Element('div');
+
+        for (let i = 0; i < this.data.players.length; i++) {
+            let player = this.data.players[i];
+            players.addChild(new Element('div').text(player.nickname));
+        }
+
+        return players;
+    }
+
+    addListeners()
+    {
+        this.on('presenter-data', this.refreshScreen.bind(this));
+    }
+
+    refreshScreen(data)
+    {
+        this.data = data;
+
+        this.renderView(data.status);
+    }
+
+
+    announceJoinRoom()
+    {
+        this.joinRoom('presenter', {});
     }
 }
 

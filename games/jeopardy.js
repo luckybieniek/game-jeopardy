@@ -48,7 +48,7 @@ class Jeopardy extends BaseGame
 
         console.log(`${player.nickname} has connected!`);
 
-        this.socket.emit('controller-data', this.getControllerData());
+        this.emitControllerData(this.socket);
     }
 
     controllerJoined(socket, data)
@@ -61,7 +61,7 @@ class Jeopardy extends BaseGame
             return;
         }
 
-        socket.emit('controller-data', this.getControllerData());
+        this.emitControllerData(socket);
 
         this.connections.controller = {
             id: socket.id,
@@ -69,6 +69,11 @@ class Jeopardy extends BaseGame
         }
 
         console.log('A controller has connected!');
+    }
+
+    emitControllerData(socket)
+    {
+        socket.emit('controller-data', this.getControllerData());
     }
 
     getControllerData()
@@ -81,7 +86,22 @@ class Jeopardy extends BaseGame
 
     presenterJoined(socket, data)
     {
+        this.emitPresenterData(socket);
 
+        console.log('A presenter has connected');
+    }
+
+    emitPresenterData(socket)
+    {
+        socket.emit('presenter-data', this.getPresenterData());
+    }
+
+    getPresenterData()
+    {
+        return {
+            players: this.connections.players,
+            status: this.gameState
+        }
     }
 
     userDisconnected(socket)
