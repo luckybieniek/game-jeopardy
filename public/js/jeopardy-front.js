@@ -58,6 +58,13 @@ class BaseJeopardy extends BaseGameFront
         this.app.loadFromId('app')
     }
 
+    static staticApp()
+    {
+        const app = new Element();
+        app.loadFromId('app');
+        return app;
+    }
+
     joinRoom(mode, data)
     {
         this.emit(`${mode}-joined`, data);
@@ -173,13 +180,13 @@ class JeopardyController extends BaseJeopardy
     init()
     {
         this.getCodeCookie();
+        this.addListeners();
         this.announceJoinRoom();
         this.showControlScreen();
     }
 
     announceJoinRoom()
     {
-        console.log('hit!');
         this.joinRoom('controller', {
             session: this.sessionCode
         });
@@ -195,6 +202,29 @@ class JeopardyController extends BaseJeopardy
             );
     }
 
+    refreshControlScreen(data)
+    {
+        const players = new Element('div');
+
+        players.addChild(new Element('strong').text('Players'));
+
+        for (let i = 0; i < data.players.length; i++) {
+            let player = data.players[i];
+
+            players.addChild(
+                new Element('div').text(player.nickname)
+            );
+        }
+
+        JeopardyController.staticApp()
+            .wipe()
+            .addChild(players);
+    }
+
+    addListeners()
+    {
+        this.on('data', this.refreshControlScreen);
+    }
 }
 
 class JeopardyPresenter extends BaseJeopardy
