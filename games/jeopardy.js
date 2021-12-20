@@ -47,11 +47,26 @@ class Jeopardy extends BaseGame
         this.connections.players.push(player);
 
         console.log(`${player.nickname} has connected!`);
+
+        // TODO: Alert controller + presenter of new players
     }
 
     controllerJoined(socket, data)
     {
+        // TODO: Add check that it's not just controller reconnecting
+        if (!Object.keys(this.connections.controller).length) {
+            socket.emit('connect-error', 'There is already a controller!');
+        }
 
+        socket.emit('data', {
+            players: this.connections.players
+        });
+
+
+        this.connections.controller = {
+            id: socket.id,
+            session: data.session
+        }
     }
 
     presenterJoined(socket, data)
