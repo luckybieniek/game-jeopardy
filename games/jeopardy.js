@@ -11,9 +11,13 @@ class Jeopardy extends BaseGame
         players: [],
     }
 
-    gameState = 'waiting-room'
-
-    game = 'game1'
+    game = {
+        state: 'waiting-room',
+        name: 'game1',
+        data: {},
+        progress: {
+        }
+    }
 
     constructor(socket) {
         super(socket);
@@ -84,7 +88,7 @@ class Jeopardy extends BaseGame
     {
         socket.emit('join-attempt-successful', {
             nickname: nickname,
-            gameState: this.gameState
+            gameState: this.game.state
         })
     }
 
@@ -115,8 +119,10 @@ class Jeopardy extends BaseGame
     {
         return {
             players: this.connections.players,
-            status: this.gameState,
-            availableGames: Object.keys(gameData)
+            status: this.game.state,
+            availableGames: Object.keys(gameData),
+            gameData: this.game.data,
+            gameProgress: this.game.progress
         }
     }
 
@@ -136,19 +142,18 @@ class Jeopardy extends BaseGame
     {
         return {
             players: this.connections.players,
-            status: this.gameState
+            status: this.game.state
         }
     }
 
     startGame(data)
     {
-        this.game = data.game;
-        this.gameState = 'first-round'
+        this.game.name = data.game;
+        this.game.state = 'first-round'
+        this.game.data = gameData[this.game.name];
 
-        this.socket.emit('game-starting', {
-            gameData: gameData[this.game],
-            gameState: this.gameState,
-        })
+        this.socket.emit('game-starting');
+        this.emitControllerData(this.socket);
     }
 }
 

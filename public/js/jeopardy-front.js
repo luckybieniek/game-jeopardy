@@ -181,7 +181,6 @@ class JeopardyPlayer extends BaseJeopardy
         this.showGameScreen();
     }
 
-
     submitJoinGameForm(e)
     {
         e.preventDefault();
@@ -243,10 +242,8 @@ class JeopardyController extends BaseJeopardy
             );
     }
 
-    refreshControlScreen(data)
+    refreshControlScreen()
     {
-        this.data = data;
-
         const wrapper = new Element('div')
             .prop('id', 'wrapper');
 
@@ -254,6 +251,7 @@ class JeopardyController extends BaseJeopardy
         this.addPlayerList(wrapper);
         this.addGameModeOptions(wrapper);
         this.addStartGameButton(wrapper);
+        this.addGameGrid(wrapper)
         // TODO: add a "reset all" button that wipes everything
 
         this.app
@@ -278,7 +276,7 @@ class JeopardyController extends BaseJeopardy
             let player = this.data.players[i];
 
             players.addChild(
-                new Element('div').text(player.nickname)
+                new Element('div').text(`${player.nickname} - ${player.points}`)
             );
         }
 
@@ -315,22 +313,69 @@ class JeopardyController extends BaseJeopardy
         wrapper.addChild(
             new Element('button')
                 .text('Start game!')
-                .on('click', this.startGame.bind(this))
+                .on('click', this.startGameEvent.bind(this))
         );
     }
 
-    startGame()
+    addGameGrid(wrapper)
+    {
+        if (
+            this.data.status !== 'first-round' &&
+            this.data.status !== 'second-round'
+        ) {
+            return;
+        }
+
+        const grid = this.data.gameData.questions[this.data.status];
+
+        const categories = Object.keys(grid);
+
+        const gridWrapper = new Element('div');
+
+        for (let i = 0; i < categories.length; i++) {
+            let category = categories[i];
+            let categoryQuestions = grid[category];
+
+            let categoryWrapper = new Element('div')
+                .addChild(new Element('strong').text(category));
+
+            let questionPoints = Object.keys(categoryQuestions);
+
+            for (let x = 0; x < questionPoints.length; x++) {
+                let questionPoint = questionPoints[x];
+                let question = categoryQuestions[questionPoint];
+
+                categoryWrapper.addChild(
+                    new Element('button')
+                        .text(questionPoint)
+                        .attr('data-question', question.question)
+                        .attr('data-answer', question.answer)
+                        .attr('data-value', questionPoint)
+                )
+            }
+
+            gridWrapper.addChild(categoryWrapper);
+        }
+
+        wrapper.addChild(gridWrapper);
+    }
+
+    startGameEvent()
     {
         this.emit('start-game', {
             game: document.getElementById('game-option').value,
         })
     }
 
+    gameDataReceived(data)
+    {
+        this.data = data;
+        this.refreshControlScreen();
+    }
+
     addListeners()
     {
-        this.on('controller-data', this.refreshControlScreen.bind(this));
-
-        // this.on('game-starting', )
+        this.on('controller-data', this.gameDataReceived.bind(this));
     }
 }
 
