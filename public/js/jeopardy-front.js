@@ -223,7 +223,7 @@ class JeopardyController extends BaseJeopardy
 
     addListeners()
     {
-        this.on('data', this.refreshControlScreen);
+        this.on('controller-data', this.refreshControlScreen);
     }
 }
 

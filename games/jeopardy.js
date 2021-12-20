@@ -48,7 +48,7 @@ class Jeopardy extends BaseGame
 
         console.log(`${player.nickname} has connected!`);
 
-        // TODO: Alert controller + presenter of new players
+        this.socket.emit('controller-data', this.getControllerData());
     }
 
     controllerJoined(socket, data)
@@ -61,9 +61,7 @@ class Jeopardy extends BaseGame
             return;
         }
 
-        socket.emit('data', {
-            players: this.connections.players
-        });
+        socket.emit('controller-data', this.getControllerData());
 
 
         this.connections.controller = {
@@ -72,6 +70,13 @@ class Jeopardy extends BaseGame
         }
 
         console.log('A controller has connected!');
+    }
+
+    getControllerData()
+    {
+        return {
+            players: this.connections.players
+        }
     }
 
     presenterJoined(socket, data)
