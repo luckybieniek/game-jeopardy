@@ -204,6 +204,9 @@ class JeopardyController extends BaseJeopardy
 
     refreshControlScreen(data)
     {
+        const wrapper = new Element('div')
+            .prop('id', 'wrapper');
+
         const status = new Element('div').html(`<strong>Game status:</strong> ${data.status}`)
 
         const players = new Element('div');
@@ -218,12 +221,17 @@ class JeopardyController extends BaseJeopardy
             );
         }
 
+        wrapper.addChild(status)
+            .addChild(players);
 
+        if (data.status === 'waiting-room') {
+            const startButton = new Element('button').text('Start game!');
+            wrapper.addChild(startButton);
+        }
 
         JeopardyController.staticApp()
             .wipe()
-            .addChild(status)
-            .addChild(players);
+            .addChild(wrapper);
     }
 
     addListeners()
