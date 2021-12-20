@@ -53,9 +53,12 @@ class Jeopardy extends BaseGame
 
     controllerJoined(socket, data)
     {
-        // TODO: Add check that it's not just controller reconnecting
-        if (!Object.keys(this.connections.controller).length) {
+        if (
+            Object.keys(this.connections.controller).length &&
+            this.connections.controller.session !== data.session
+        ) {
             socket.emit('connect-error', 'There is already a controller!');
+            return;
         }
 
         socket.emit('data', {
@@ -67,6 +70,8 @@ class Jeopardy extends BaseGame
             id: socket.id,
             session: data.session
         }
+
+        console.log('A controller has connected!');
     }
 
     presenterJoined(socket, data)

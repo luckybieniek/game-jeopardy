@@ -43,6 +43,7 @@ class JeopardyFront
 class BaseJeopardy extends BaseGameFront
 {
     app = null;
+    sessionCode = null;
     errors = [];
 
     constructor() {
@@ -69,12 +70,30 @@ class BaseJeopardy extends BaseGameFront
             this.errors.push(errMsg);
         });
     }
+
+    getCodeCookie()
+    {
+        this.sessionCode = Cookie.get('j-session');
+        if (this.sessionCode.trim() === '') {
+            this.createCodeCookie();
+        }
+    }
+
+    createCodeCookie()
+    {
+        this.sessionCode = this.generateRandomCode();
+        Cookie.set('j-session', this.sessionCode, Time.hours(2));
+    }
+
+    generateRandomCode()
+    {
+        return Random.alphanumeric(16);
+    }
 }
 
 class JeopardyPlayer extends BaseJeopardy
 {
     nickname = null;
-    sessionCode = null;
 
     constructor()
     {
@@ -123,17 +142,6 @@ class JeopardyPlayer extends BaseJeopardy
             )
     }
 
-    createCodeCookie()
-    {
-        this.sessionCode = this.generateRandomCode();
-        Cookie.set('j-session', this.sessionCode, Time.hours(2));
-    }
-
-    generateRandomCode()
-    {
-        return Random.alphanumeric(16);
-    }
-
     announceJoinRoom()
     {
         this.joinRoom('player', {
@@ -156,6 +164,36 @@ class JeopardyPlayer extends BaseJeopardy
 
 class JeopardyController extends BaseJeopardy
 {
+    constructor()
+    {
+        super();
+        this.init();
+    }
+
+    init()
+    {
+        this.getCodeCookie();
+        this.announceJoinRoom();
+        this.showControlScreen();
+    }
+
+    announceJoinRoom()
+    {
+        console.log('hit!');
+        this.joinRoom('controller', {
+            session: this.sessionCode
+        });
+    }
+
+    showControlScreen()
+    {
+        this.app
+            .wipe()
+            .addChild(
+                new Element('div')
+                    .text('Loading...')
+            );
+    }
 
 }
 
