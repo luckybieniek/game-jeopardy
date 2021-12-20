@@ -8,7 +8,6 @@ class Jeopardy extends BaseGame
 {
     connections = {
         controller: {},
-        presenter: {},
         players: [],
     }
 
@@ -36,7 +35,7 @@ class Jeopardy extends BaseGame
 
         socket.on('presenter-joined', (data) => this.presenterJoined(socket, data));
 
-        socket.on('disconnect', () => this.userDisconnected(socket));
+        socket.on('start-game', (data) => this.startGame(data));
     }
 
     playerJoined(socket, data)
@@ -49,16 +48,15 @@ class Jeopardy extends BaseGame
         const player = {
             id: socket.id,
             session: data.session,
-            nickname: data.nickname
+            nickname: data.nickname,
+            points: 0
         };
 
         this.connections.players.push(player);
 
         console.log(`${player.nickname} has connected!`);
 
-        socket.emit('join-attempt-successful', {
-            nickname: data.nickname
-        });
+        this.emitPlayerJoinData(socket, player.nickname);
 
         this.emitControllerData(this.socket);
         this.emitPresenterData(this.socket);
@@ -73,15 +71,21 @@ class Jeopardy extends BaseGame
                 continue;
             }
 
-            socket.emit('join-attempt-successful', {
-                nickname: player.nickname
-            });
+            this.emitPlayerJoinData(socket, player.nickname);
 
             this.connections.players[i].id = socket.id;
             return;
         }
 
         socket.emit('join-attempt-failed')
+    }
+
+    emitPlayerJoinData(socket, nickname)
+    {
+        socket.emit('join-attempt-successful', {
+            nickname: nickname,
+            gameState: this.gameState
+        })
     }
 
     controllerJoined(socket, data)
@@ -100,8 +104,6 @@ class Jeopardy extends BaseGame
             id: socket.id,
             session: data.session
         }
-
-        console.log('A controller has connected!');
     }
 
     emitControllerData(socket)
@@ -138,62 +140,15 @@ class Jeopardy extends BaseGame
         }
     }
 
-    userDisconnected(socket)
+    startGame(data)
     {
-    }
+        this.game = data.game;
+        this.gameState = 'first-round'
 
-    removeUser(id)
-    {
-        this.removeController(id);
-        this.removePresenter(id);
-        this.removePlayers(id);
-    }
-
-    removeController(id)
-    {
-        if (
-            !this.connections.controller.hasOwnProperty('id') ||
-            this.connections.controller.id !== id
-        ) {
-            return;
-        }
-
-        this.connections.controller = {};
-    }
-
-    removePresenter(id)
-    {
-        if (
-            !this.connections.presenter.hasOwnProperty('id') ||
-            this.connections.presenter.id !== id
-        ) {
-            return;
-        }
-
-        this.connections.presenter = {};
-    }
-
-    removePlayers(id)
-    {
-        for (let i = 0; i < this.connections.players.length; i++) {
-            this.removePlayer(i, id);
-        }
-    }
-
-    removePlayer(i, id)
-    {
-        let player = this.connections.players[i];
-
-        if (
-            !player.hasOwnProperty('id') ||
-            player.id !== id
-        ) {
-            return;
-        }
-
-        this.connections.players.splice(i, 1);
-
-        console.log(`${player.nickname} has disconnected!`);
+        this.socket.emit('game-starting', {
+            gameData: gameData[this.game],
+            gameState: this.gameState,
+        })
     }
 }
 

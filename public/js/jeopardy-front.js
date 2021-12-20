@@ -119,13 +119,9 @@ class JeopardyPlayer extends BaseJeopardy
     {
         this.on('join-attempt-failed', this.showJoinScreen.bind(this));
 
-        this.on('join-attempt-successful', this.joinAttemptSuccessful.bind(this))
-    }
+        this.on('join-attempt-successful', this.joinAttemptSuccessful.bind(this));
 
-    joinAttemptSuccessful(data)
-    {
-        this.nickname = data.nickname;
-        this.showWaitingScreen();
+        this.on('game-starting', this.showGameScreen.bind(this));
     }
 
     showJoinScreen()
@@ -152,6 +148,39 @@ class JeopardyPlayer extends BaseJeopardy
         this.app.addChild(text)
             .addChild(form);
     }
+
+    showGameScreen()
+    {
+        this.app
+            .wipe()
+            .addChild(
+                new Element('div')
+                    .prop('id', 'red-button')
+                    .on('click', this.clickButton.bind(this))
+            );
+    }
+
+    clickButton()
+    {
+        let time = Time.now();
+
+        this.emit('player-pressed-button', {
+            timestamp: time,
+        })
+    }
+
+    joinAttemptSuccessful(data)
+    {
+        this.nickname = data.nickname;
+
+        if (data.gameState === 'waiting-room') {
+            this.showWaitingScreen();
+            return;
+        }
+
+        this.showGameScreen();
+    }
+
 
     submitJoinGameForm(e)
     {
@@ -262,7 +291,8 @@ class JeopardyController extends BaseJeopardy
             return;
         }
 
-        const games = new Element('select');
+        const games = new Element('select')
+            .prop('id', 'game-option');
 
         for (let i = 0; i < this.data.availableGames.length; i++) {
             let game = this.data.availableGames[i];
@@ -275,7 +305,6 @@ class JeopardyController extends BaseJeopardy
         }
 
         wrapper.addChild(games);
-
     }
 
     addStartGameButton(wrapper)
@@ -286,18 +315,22 @@ class JeopardyController extends BaseJeopardy
         wrapper.addChild(
             new Element('button')
                 .text('Start game!')
-                .on('click', this.startGame)
+                .on('click', this.startGame.bind(this))
         );
     }
 
     startGame()
     {
-        console.log('Starting Game!!');
+        this.emit('start-game', {
+            game: document.getElementById('game-option').value,
+        })
     }
 
     addListeners()
     {
         this.on('controller-data', this.refreshControlScreen.bind(this));
+
+        // this.on('game-starting', )
     }
 }
 
@@ -422,6 +455,11 @@ class Time
     static seconds(val)
     {
         return val * 1000;
+    }
+
+    static now()
+    {
+        return Date.now();
     }
 }
 

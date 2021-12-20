@@ -13,3 +13,16 @@
 .text-xxl {
     font-size: 800%;
 }
+
+#red-button {
+    background-color: #a12020;
+    border-radius: 100%;
+    width: min(80vw, 80vh);
+    height: min(80vw, 80vh);
+    margin: auto;
+}
+
+#red-button:hover {
+    background-color: #521010;
+    cursor: pointer;
+}
